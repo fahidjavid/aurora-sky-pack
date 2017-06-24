@@ -154,6 +154,130 @@ class Aurora_Sky_Pack {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
+		/**
+		 * Meta Boxes Stuff
+		 */
+		// Deactivate Meta Box Plugin and related extensions if Installed
+		add_action( 'init', function () {
+
+			include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+
+			// Meta Box Plugin
+			if ( is_plugin_active( 'meta-box/meta-box.php' ) ) {
+				deactivate_plugins( 'meta-box/meta-box.php' );
+				add_action( 'admin_notices', function () {
+					?>
+					<div class="notice notice-warning is-dismissible">
+						<p>
+							<strong><?php esc_html_e( 'Meta Box plugin has been deactivated!', 'aurora-sky-pack' ); ?></strong>
+							<?php esc_html_e( 'Its functionality is embedded within the Inspiry Tours plugin.', 'aurora-sky-pack' ); ?>
+						</p>
+						<p>
+							<em><?php esc_html_e( 'So, You should remove it completely from your plugins.', 'aurora-sky-pack' ); ?></em>
+						</p>
+					</div>
+					<?php
+				} );
+			}
+
+			// Meta Box Columns Extension
+			if ( is_plugin_active( 'meta-box-columns/meta-box-columns.php' ) ) {
+				deactivate_plugins( 'meta-box-columns/meta-box-columns.php' );
+				add_action( 'admin_notices', function () {
+					?>
+					<div class="notice notice-warning is-dismissible">
+						<p>
+							<strong><?php esc_html_e( 'Meta Box Columns plugin has been deactivated!', 'aurora-sky-pack' ); ?></strong>
+							&nbsp;<?php esc_html_e( 'Its functionality is embedded within the Inspiry Tours plugin.', 'aurora-sky-pack' ); ?>
+						</p>
+						<p>
+							<em><?php esc_html_e( 'So, You should remove it completely from your plugins.', 'aurora-sky-pack' ); ?></em>
+						</p>
+					</div>
+					<?php
+				} );
+			}
+
+			// Meta Box Tabs Extension
+			if ( is_plugin_active( 'meta-box-tabs/meta-box-tabs.php' ) ) {
+				deactivate_plugins( 'meta-box-tabs/meta-box-tabs.php' );
+				add_action( 'admin_notices', function () {
+					?>
+					<div class="notice notice-warning is-dismissible">
+						<p>
+							<strong><?php esc_html_e( 'Meta Box Tabs plugin has been deactivated!', 'aurora-sky-pack' ); ?></strong>
+							&nbsp;<?php esc_html_e( 'Its functionality is embedded within the Inspiry Tours plugin.', 'aurora-sky-pack' ); ?>
+						</p>
+						<p>
+							<em><?php esc_html_e( 'So, You should remove it completely from your plugins.', 'aurora-sky-pack' ); ?></em>
+						</p>
+					</div>
+					<?php
+				} );
+			}
+
+			// Meta Box Show Hide Extension
+			if ( is_plugin_active( 'meta-box-show-hide/meta-box-show-hide.php' ) ) {
+				deactivate_plugins( 'meta-box-show-hide/meta-box-show-hide.php' );
+				add_action( 'admin_notices', function () {
+					?>
+					<div class="notice notice-warning is-dismissible">
+						<p>
+							<strong><?php esc_html_e( 'Meta Box Show Hide plugin has been deactivated!', 'aurora-sky-pack' ); ?></strong>
+							&nbsp;<?php esc_html_e( 'Its functionality is embedded within the Inspiry Tours plugin.', 'aurora-sky-pack' ); ?>
+						</p>
+						<p>
+							<em><?php esc_html_e( 'So, You should remove it completely from your plugins.', 'aurora-sky-pack' ); ?></em>
+						</p>
+					</div>
+					<?php
+				} );
+			}
+
+			// Meta Box Group Extension
+			if ( is_plugin_active( 'meta-box-group/meta-box-group.php' ) ) {
+				deactivate_plugins( 'meta-box-group/meta-box-group.php' );
+				add_action( 'admin_notices', function () {
+					?>
+					<div class="notice notice-warning is-dismissible">
+						<p>
+							<strong><?php esc_html_e( 'Meta Box Group plugin has been deactivated!', 'aurora-sky-pack' ); ?></strong>
+							&nbsp;<?php esc_html_e( 'Its functionality is embedded within the Inspiry Tours plugin.', 'aurora-sky-pack' ); ?>
+						</p>
+						<p>
+							<em><?php esc_html_e( 'So, You should remove it completely from your plugins.', 'aurora-sky-pack' ); ?></em>
+						</p>
+					</div>
+					<?php
+				} );
+			}
+
+		} );
+
+		// Embedded meta box plugin
+		if ( ! class_exists( 'RWMB_Core' ) ) {
+			require_once( plugin_dir_path( __DIR__ ) . '/plugins/meta-box/meta-box.php' );
+		}
+
+		/**
+		 * Meta Box Plugin Extensions
+		 */
+
+		// Columns extension
+		require_once( plugin_dir_path( __DIR__ ) . '/plugins/meta-box-extensions/meta-box-columns/meta-box-columns.php' );
+
+		// Show Hide extension
+		require_once( plugin_dir_path( __DIR__ ) . '/plugins/meta-box-extensions/meta-box-show-hide/meta-box-show-hide.php' );
+
+		// Tabs extension
+		require_once( plugin_dir_path( __DIR__ ) . '/plugins/meta-box-extensions/meta-box-tabs/meta-box-tabs.php' );
+
+		// Group extension
+		require_once( plugin_dir_path( __DIR__ ) . '/plugins/meta-box-extensions/meta-box-group/meta-box-group.php' );
+
+		// Term Meta extension
+		require_once( plugin_dir_path( __DIR__ ) . '/plugins/meta-box-extensions/mb-term-meta/mb-term-meta.php' );
+
 	}
 
 	/**
